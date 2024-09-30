@@ -68,10 +68,9 @@ else:
 
 JD_UT1 = jd(year, month, day, hour, minute, second)
 T_UT1 = (JD_UT1 - 2451545.0)/36525
-GMST_angle_sec = math.fmod(67310.54841 + (876600 * 60 * 60 + 8640184.812866) * T_UT1 + 0.093104 * T_UT1**2 -6.2 * 10 ** -6 * T_UT1**3, 86400)
-if GMST_angle_sec < 0:
-    GMST_angle_sec += 86400
-GMST_angle_rad = GMST_angle_sec * w
+GMST_angle_sec = math.fmod(67310.54841 + (876600*60*60 + 8640184.812866)*T_UT1 + 0.093104*T_UT1**2 +  -6.2*10**-6*T_UT1**3, 86400)
+GMST_angle_rad = GMST_angle_sec * w + 2*math.pi
+GMST_angle_rad = math.fmod(GMST_angle_rad, 2*math.pi)
 angle = -1 * GMST_angle_rad
 
 c = math.cos(angle)
